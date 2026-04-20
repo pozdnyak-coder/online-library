@@ -5,7 +5,9 @@
     <style>
         body { font-family: Arial, sans-serif; margin: 20px; }
         .book { border: 1px solid #ccc; padding: 10px; margin: 10px 0; border-radius: 5px; }
-        .btn { display: inline-block; padding: 5px 10px; background: #007bff; color: white; text-decoration: none; border-radius: 3px; }
+        .btn { display: inline-block; padding: 5px 10px; background: #007bff; color: white; text-decoration: none; border-radius: 3px; margin-right: 5px; }
+        .btn-fav { background: #ffc107; color: black; }
+        .btn-remove { background: #dc3545; color: white; }
     </style>
 </head>
 <body>
@@ -15,8 +17,23 @@
             <strong>{{ book.title }}</strong> — {{ book.author }}
             <div style="margin-top: 10px;">
                 <a href="{{ url_for('read_book', book_id=book.id) }}" class="btn">📖 Читать</a>
+                {% if book.id in favorites %}
+                    <a href="{{ url_for('remove_favorite', book_id=book.id) }}" class="btn btn-remove">❤️ Убрать из избранного</a>
+                {% else %}
+                    <a href="{{ url_for('add_favorite', book_id=book.id) }}" class="btn btn-fav">☆ В избранное</a>
+                {% endif %}
             </div>
         </div>
     {% endfor %}
+
+    <hr>
+    <h2>Избранное ({{ favorites|length }})</h2>
+    <ul>
+    {% for book in books %}
+        {% if book.id in favorites %}
+            <li>{{ book.title }}</li>
+        {% endif %}
+    {% endfor %}
+    </ul>
 </body>
 </html>
