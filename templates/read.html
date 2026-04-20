@@ -1,4 +1,15 @@
-venv/
-.idea/
-__pycache__/
-*.pyc
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Чтение: {{ book.title }}</title>
+</head>
+<body>
+    <a href="{{ url_for('index') }}">← Назад к списку</a>
+    <h1>{{ book.title }}</h1>
+    <h3>{{ book.author }}</h3>
+    <hr>
+    <div style="white-space: pre-wrap; font-family: 'Times New Roman', serif; font-size: 18px; line-height: 1.6;">
+        {{ book.content }}
+    </div>
+</body>
+</html>
