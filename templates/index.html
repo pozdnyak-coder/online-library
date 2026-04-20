@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Онлайн библиотека</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        .book { border: 1px solid #ccc; padding: 10px; margin: 10px 0; border-radius: 5px; }
+        .btn { display: inline-block; padding: 5px 10px; background: #007bff; color: white; text-decoration: none; border-radius: 3px; }
+    </style>
+</head>
+<body>
+    <h1>Мои книги</h1>
+    {% for book in books %}
+        <div class="book">
+            <strong>{{ book.title }}</strong> — {{ book.author }}
+            <div style="margin-top: 10px;">
+                <a href="{{ url_for('read_book', book_id=book.id) }}" class="btn">📖 Читать</a>
+            </div>
+        </div>
+    {% endfor %}
+</body>
+</html>
